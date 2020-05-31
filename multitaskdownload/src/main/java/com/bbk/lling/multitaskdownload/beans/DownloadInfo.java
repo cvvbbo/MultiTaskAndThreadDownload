@@ -2,21 +2,21 @@ package com.bbk.lling.multitaskdownload.beans;
 
 /**
  * @Class: DownloadInfo
- * @Description: ÏÂÔØ×´Ì¬ĞÅÏ¢
+ * @Description: ä¸‹è½½çŠ¶æ€ä¿¡æ¯
  * @author: lling(www.cnblogs.com/liuling)
  * @Date: 2015/10/13
  */
 public class DownloadInfo {
 
-    private String url;  //ÏÂÔØµÄÁ´½Ó
+    private String url;  //ä¸‹è½½çš„é“¾æ¥
 
-    //¸ºÔğÏÂÔØµÄAsyncTaskµÄ±àºÅ£¬Ò»¸öÎÄ¼şÓÉ3¸öÏß³ÌÏÂÔØ£¬±àºÅ·Ö±ğÎª0,¡¢1¡¢2
+    //è´Ÿè´£ä¸‹è½½çš„AsyncTaskçš„ç¼–å·ï¼Œä¸€ä¸ªæ–‡ä»¶ç”±3ä¸ªçº¿ç¨‹ä¸‹è½½ï¼Œç¼–å·åˆ†åˆ«ä¸º0,ã€1ã€2
     private int taskId;
 
-    //¼ÇÂ¼¸ÃÏß³ÌÒÑ¾­ÏÂÔØµÄ³¤¶È
+    //è®°å½•è¯¥çº¿ç¨‹å·²ç»ä¸‹è½½çš„é•¿åº¦
     private long downloadLength;
 
-    //±êÊ¶¸ÃÏß³ÌµÄÏÂÔØÈÎÎñÊÇ·ñÍê³É
+    //æ ‡è¯†è¯¥çº¿ç¨‹çš„ä¸‹è½½ä»»åŠ¡æ˜¯å¦å®Œæˆ
     private int downloadSuccess;
 
     public String getUrl() {

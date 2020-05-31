@@ -66,18 +66,18 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * ³õÊ¼»¯ÏÂÔØ×´Ì¬
+     * åˆå§‹åŒ–ä¸‹è½½çŠ¶æ€
      */
     private void initStatus() {
         List<AppContent> list = DownloadFileDAO.getInstance(this.getApplicationContext()).getAll();
         for (AppContent appContent : list) {
-             for (AppContent app : mList) {
-                 if(app.getUrl().equals(appContent.getUrl())) {
-                     app.setStatus(appContent.getStatus());
-                     app.setDownloadPercent(appContent.getDownloadPercent());
-                     break;
-                 }
-             }
+            for (AppContent app : mList) {
+                if(app.getUrl().equals(appContent.getUrl())) {
+                    app.setStatus(appContent.getStatus());
+                    app.setDownloadPercent(appContent.getDownloadPercent());
+                    break;
+                }
+            }
         }
     }
 
@@ -105,13 +105,13 @@ public class MainActivity extends Activity {
     };
 
     private void updateView(int itemIndex) {
-        //µÃµ½µÚÒ»¸ö¿ÉÏÔÊ¾¿Ø¼şµÄÎ»ÖÃ£¬
+        //å¾—åˆ°ç¬¬ä¸€ä¸ªå¯æ˜¾ç¤ºæ§ä»¶çš„ä½ç½®ï¼Œ
         int visiblePosition = mListView.getFirstVisiblePosition();
-        //Ö»ÓĞµ±Òª¸üĞÂµÄviewÔÚ¿É¼ûµÄÎ»ÖÃÊ±²Å¸üĞÂ£¬²»¿É¼ûÊ±£¬Ìø¹ı²»¸üĞÂ
+        //åªæœ‰å½“è¦æ›´æ–°çš„viewåœ¨å¯è§çš„ä½ç½®æ—¶æ‰æ›´æ–°ï¼Œä¸å¯è§æ—¶ï¼Œè·³è¿‡ä¸æ›´æ–°
         if (itemIndex - visiblePosition >= 0) {
-            //µÃµ½Òª¸üĞÂµÄitemµÄview
+            //å¾—åˆ°è¦æ›´æ–°çš„itemçš„view
             View view = mListView.getChildAt(itemIndex - visiblePosition);
-            //µ÷ÓÃadapter¸üĞÂ½çÃæ
+            //è°ƒç”¨adapteræ›´æ–°ç•Œé¢
             mAdapter.updateView(view, itemIndex);
         }
     }

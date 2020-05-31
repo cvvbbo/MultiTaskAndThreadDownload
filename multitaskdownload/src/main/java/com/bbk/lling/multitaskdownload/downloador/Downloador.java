@@ -28,22 +28,22 @@ import java.util.concurrent.Executors;
 
 /**
  * @Class: Downloador
- * @Description: ÈÎÎñÏÂÔØÆ÷
+ * @Description: ä»»åŠ¡ä¸‹è½½å™¨
  * @author: lling(www.cnblogs.com/liuling)
  * @Date: 2015/10/13
  */
 public class Downloador {
     public static final String TAG = "Downloador";
-    private static final int THREAD_POOL_SIZE = 9;  //Ïß³Ì³Ø´óĞ¡Îª9
-    private static final int THREAD_NUM = 3;  //Ã¿¸öÎÄ¼ş3¸öÏß³ÌÏÂÔØ
+    private static final int THREAD_POOL_SIZE = 9;  //çº¿ç¨‹æ± å¤§å°ä¸º9
+    private static final int THREAD_NUM = 3;  //æ¯ä¸ªæ–‡ä»¶3ä¸ªçº¿ç¨‹ä¸‹è½½
     private static final int GET_LENGTH_SUCCESS = 1;
     public static final Executor THREAD_POOL_EXECUTOR = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
 
     private List<DownloadTask> tasks;
     private InnerHandler handler = new InnerHandler();
 
-    private AppContent appContent; //´ıÏÂÔØµÄÓ¦ÓÃ
-    private long downloadLength; //ÏÂÔØ¹ı³ÌÖĞ¼ÇÂ¼ÒÑÏÂÔØ´óĞ¡
+    private AppContent appContent; //å¾…ä¸‹è½½çš„åº”ç”¨
+    private long downloadLength; //ä¸‹è½½è¿‡ç¨‹ä¸­è®°å½•å·²ä¸‹è½½å¤§å°
     private long fileLength;
     private Context context;
     private String downloadPath;
@@ -55,11 +55,11 @@ public class Downloador {
     }
 
     /**
-     * ¿ªÊ¼ÏÂÔØ
+     * å¼€å§‹ä¸‹è½½
      */
     public void download() {
         if(TextUtils.isEmpty(downloadPath)) {
-            Toast.makeText(context, "Î´ÕÒµ½SD¿¨", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "æœªæ‰¾åˆ°SDå¡", Toast.LENGTH_SHORT).show();
             return;
         }
         if(appContent == null) {
@@ -68,7 +68,7 @@ public class Downloador {
         new Thread() {
             @Override
             public void run() {
-                //»ñÈ¡ÎÄ¼ş´óĞ¡
+                //è·å–æ–‡ä»¶å¤§å°
                 HttpClient client = new DefaultHttpClient();
                 HttpGet request = new HttpGet(appContent.getUrl());
                 HttpResponse response = null;
@@ -82,14 +82,14 @@ public class Downloador {
                         request.abort();
                     }
                 }
-                //¼ÆËã³ö¸ÃÎÄ¼şÒÑ¾­ÏÂÔØµÄ×Ü³¤¶È
+                //è®¡ç®—å‡ºè¯¥æ–‡ä»¶å·²ç»ä¸‹è½½çš„æ€»é•¿åº¦
                 List<DownloadInfo> lists = DownloadInfoDAO.getInstance(context.getApplicationContext())
                         .getDownloadInfosByUrl(appContent.getUrl());
                 for (DownloadInfo info : lists) {
                     downloadLength += info.getDownloadLength();
                 }
 
-                //²åÈëÎÄ¼şÏÂÔØ¼ÇÂ¼µ½Êı¾İ¿â
+                //æ’å…¥æ–‡ä»¶ä¸‹è½½è®°å½•åˆ°æ•°æ®åº“
                 DownloadFileDAO.getInstance(context.getApplicationContext()).insertDownloadFile(appContent);
                 Message.obtain(handler, GET_LENGTH_SUCCESS).sendToTarget();
             }
@@ -97,17 +97,17 @@ public class Downloador {
     }
 
     /**
-     * ¿ªÊ¼´´½¨AsyncTaskÏÂÔØ
+     * å¼€å§‹åˆ›å»ºAsyncTaskä¸‹è½½
      */
     private void beginDownload() {
         Log.e(TAG, "beginDownload" + appContent.getUrl());
         appContent.setStatus(AppContent.Status.WAITING);
         long blockLength = fileLength / THREAD_NUM;
         for (int i = 0; i < THREAD_NUM; i++) {
-            long beginPosition = i * blockLength;//Ã¿ÌõÏß³ÌÏÂÔØµÄ¿ªÊ¼Î»ÖÃ
-            long endPosition = (i + 1) * blockLength;//Ã¿ÌõÏß³ÌÏÂÔØµÄ½áÊøÎ»ÖÃ
+            long beginPosition = i * blockLength;//æ¯æ¡çº¿ç¨‹ä¸‹è½½çš„å¼€å§‹ä½ç½®
+            long endPosition = (i + 1) * blockLength;//æ¯æ¡çº¿ç¨‹ä¸‹è½½çš„ç»“æŸä½ç½®
             if (i == (THREAD_NUM - 1)) {
-                endPosition = fileLength;//Èç¹ûÕû¸öÎÄ¼şµÄ´óĞ¡²»ÎªÏß³Ì¸öÊıµÄÕûÊı±¶£¬Ôò×îºóÒ»¸öÏß³ÌµÄ½áÊøÎ»ÖÃ¼´ÎªÎÄ¼şµÄ×Ü³¤¶È
+                endPosition = fileLength;//å¦‚æœæ•´ä¸ªæ–‡ä»¶çš„å¤§å°ä¸ä¸ºçº¿ç¨‹ä¸ªæ•°çš„æ•´æ•°å€ï¼Œåˆ™æœ€åä¸€ä¸ªçº¿ç¨‹çš„ç»“æŸä½ç½®å³ä¸ºæ–‡ä»¶çš„æ€»é•¿åº¦
             }
             DownloadTask task = new DownloadTask(i, beginPosition, endPosition, this, context);
             task.executeOnExecutor(THREAD_POOL_EXECUTOR, appContent.getUrl());
@@ -119,7 +119,7 @@ public class Downloador {
     }
 
     /**
-     * ÔİÍ£ÏÂÔØ
+     * æš‚åœä¸‹è½½
      */
     public void pause() {
         for (DownloadTask task : tasks) {
@@ -133,24 +133,24 @@ public class Downloador {
     }
 
     /**
-     * ½«ÒÑÏÂÔØ´óĞ¡¹éÁã
+     * å°†å·²ä¸‹è½½å¤§å°å½’é›¶
      */
     protected synchronized void resetDownloadLength() {
         this.downloadLength = 0;
     }
 
     /**
-     * Ìí¼ÓÒÑÏÂÔØ´óĞ¡
-     * ¶àÏß³Ì·ÃÎÊĞè¼ÓËø
+     * æ·»åŠ å·²ä¸‹è½½å¤§å°
+     * å¤šçº¿ç¨‹è®¿é—®éœ€åŠ é”
      * @param size
      */
     protected synchronized void updateDownloadLength(long size){
         this.downloadLength += size;
-        //Í¨Öª¸üĞÂ½çÃæ
+        //é€šçŸ¥æ›´æ–°ç•Œé¢
         int percent = (int)((float)downloadLength * 100 / (float)fileLength);
         appContent.setDownloadPercent(percent);
         if(percent == 100 || downloadLength == fileLength) {
-            appContent.setDownloadPercent(100); //ÉÏÃæ¼ÆËãÓĞÊ±ºò»áÓĞµãÎó²î£¬Ëãµ½percent=99
+            appContent.setDownloadPercent(100); //ä¸Šé¢è®¡ç®—æœ‰æ—¶å€™ä¼šæœ‰ç‚¹è¯¯å·®ï¼Œç®—åˆ°percent=99
             appContent.setStatus(AppContent.Status.FINISHED);
             DownloadFileDAO.getInstance(context.getApplicationContext()).updateDownloadFile(appContent);
         }

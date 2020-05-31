@@ -7,14 +7,14 @@ import java.io.Serializable;
 
 /**
  * @Class: AppContent
- * @Description: Ó¦ÓÃÊĞ³¡appÄÚÈİ
+ * @Description: åº”ç”¨å¸‚åœºappå†…å®¹
  * @author: lling(www.cnblogs.com/liuling)
  * @Date: 2015/10/13
  */
 public class AppContent implements Serializable, Parcelable {
-    //Ó¦ÓÃÃû×Ö
+    //åº”ç”¨åå­—
     private String name;
-    //Ó¦ÓÃÏÂÔØÁ´½Ó
+    //åº”ç”¨ä¸‹è½½é“¾æ¥
     private String url;
 
     private int downloadPercent = 0;
@@ -25,6 +25,24 @@ public class AppContent implements Serializable, Parcelable {
         this.name = name;
         this.url = url;
     }
+
+    protected AppContent(Parcel in) {
+        name = in.readString();
+        url = in.readString();
+        downloadPercent = in.readInt();
+    }
+
+    public static final Creator<AppContent> CREATOR = new Creator<AppContent>() {
+        @Override
+        public AppContent createFromParcel(Parcel in) {
+            return new AppContent(in);
+        }
+
+        @Override
+        public AppContent[] newArray(int size) {
+            return new AppContent[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -68,11 +86,11 @@ public class AppContent implements Serializable, Parcelable {
         return 0;
     }
 
-    //ÊµÏÖParcel½Ó¿Ú±ØĞë¸²¸ÇÊµÏÖµÄ·½·¨
+    //å®ç°Parcelæ¥å£å¿…é¡»è¦†ç›–å®ç°çš„æ–¹æ³•
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        /*½«AppContentµÄ³ÉÔ±Ğ´ÈëParcel£¬
-         * ×¢£ºParcelÖĞµÄÊı¾İÊÇ°´Ë³ĞòĞ´ÈëºÍ¶ÁÈ¡µÄ£¬¼´ÏÈ±»Ğ´ÈëµÄ¾Í»áÏÈ±»¶ÁÈ¡³öÀ´
+        /*å°†AppContentçš„æˆå‘˜å†™å…¥Parcelï¼Œ
+         * æ³¨ï¼šParcelä¸­çš„æ•°æ®æ˜¯æŒ‰é¡ºåºå†™å…¥å’Œè¯»å–çš„ï¼Œå³å…ˆè¢«å†™å…¥çš„å°±ä¼šå…ˆè¢«è¯»å–å‡ºæ¥
          */
         dest.writeString(name);
         dest.writeString(url);
@@ -80,32 +98,32 @@ public class AppContent implements Serializable, Parcelable {
         dest.writeValue(status);
     }
 
-    //¸Ã¾²Ì¬ÓòÊÇ±ØĞëÒªÓĞµÄ£¬¶øÇÒÃû×Ö±ØĞëÊÇCREATOR£¬·ñÔò»á³ö´í
-    public static final Parcelable.Creator<AppContent> CREATOR =
-            new Parcelable.Creator<AppContent>() {
-
-                @Override
-                public AppContent createFromParcel(Parcel source) {
-                    //´ÓParcel¶ÁÈ¡Í¨¹ıwriteToParcel·½·¨Ğ´ÈëµÄAppContentµÄÏà¹Ø³ÉÔ±ĞÅÏ¢
-                    String name = source.readString();
-                    String url = source.readString();
-                    int downloadPercent = source.readInt();
-                    Status status = (Status)source.readValue(new ClassLoader(){});
-                    AppContent appContent = new AppContent(name, url);
-                    appContent.setDownloadPercent(downloadPercent);
-                    appContent.setStatus(status);
-                    //¸ü¼Ó¶ÁÈ¡µ½µÄĞÅÏ¢£¬´´½¨·µ»ØPerson¶ÔÏó
-                    return appContent;
-                }
-
-                @Override
-                public AppContent[] newArray(int size)
-                {
-                    // TODO Auto-generated method stub
-                    //·µ»ØAppContent¶ÔÏóÊı×é
-                    return new AppContent[size];
-                }
-            };
+    //è¯¥é™æ€åŸŸæ˜¯å¿…é¡»è¦æœ‰çš„ï¼Œè€Œä¸”åå­—å¿…é¡»æ˜¯CREATORï¼Œå¦åˆ™ä¼šå‡ºé”™
+//    public static final Parcelable.Creator<AppContent> CREATOR =
+//            new Parcelable.Creator<AppContent>() {
+//
+//                @Override
+//                public AppContent createFromParcel(Parcel source) {
+//                    //ä»Parcelè¯»å–é€šè¿‡writeToParcelæ–¹æ³•å†™å…¥çš„AppContentçš„ç›¸å…³æˆå‘˜ä¿¡æ¯
+//                    String name = source.readString();
+//                    String url = source.readString();
+//                    int downloadPercent = source.readInt();
+//                    Status status = (Status)source.readValue(new ClassLoader(){});
+//                    AppContent appContent = new AppContent(name, url);
+//                    appContent.setDownloadPercent(downloadPercent);
+//                    appContent.setStatus(status);
+//                    //æ›´åŠ è¯»å–åˆ°çš„ä¿¡æ¯ï¼Œåˆ›å»ºè¿”å›Personå¯¹è±¡
+//                    return appContent;
+//                }
+//
+//                @Override
+//                public AppContent[] newArray(int size)
+//                {
+//                    // TODO Auto-generated method stub
+//                    //è¿”å›AppContentå¯¹è±¡æ•°ç»„
+//                    return new AppContent[size];
+//                }
+//            };
 
     public enum Status {
         /**

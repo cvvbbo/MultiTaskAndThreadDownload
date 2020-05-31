@@ -17,7 +17,7 @@ import java.util.List;
 public class DownloadUtils {
 
     /**
-     * »ñÈ¡ÏÂÔØÎÄ¼ş´æ´¢Ä¿Â¼
+     * è·å–ä¸‹è½½æ–‡ä»¶å­˜å‚¨ç›®å½•
      * @return
      */
     public static String getDownloadPath() {
@@ -30,37 +30,40 @@ public class DownloadUtils {
     }
 
     /**
-     * »ñÈ¡²âÊÔÊı¾İ
+     * è·å–æµ‹è¯•æ•°æ®
      * @return
      */
     public static List<AppContent> getTestData() {
         List<AppContent> list = new ArrayList<AppContent>();
-        AppContent app1 = new AppContent("ÆæÈ¤Óª", "http://219.128.78.33/apk.r1.market.hiapk.com/data/upload/apkres/2015/9_25/18/com.lling.qiqu_060245.apk");
+        AppContent app1 = new AppContent("å¥‡è¶£è¥", "http://s.shouji.qihucdn.com/200415/c185e5d0f04224396f393a621d074df5/com.zzlywgl.h5.zzly2_128.apk?en=curpage%3D%26exp%3D1591433424%26from%3DGuessyoulike_detail%26m2%3D%26ts%3D1590828624%26tok%3D7f7f3e53203a9d3dfecaff5f6dc284c9%26v%3D%26f%3Dz.apk");
         list.add(app1);
-        AppContent app2 = new AppContent("ÔÆÀÏÊ¦", "http://183.57.28.39/apk.r1.market.hiapk.com/data/upload/apkres/2015/9_30/9/com.bbk.cloudteacher_095422.apk");
+        AppContent app2 = new AppContent("äº‘è€å¸ˆ", "http://s.shouji.qihucdn.com/200527/fe688225b8d19cf46f747878ceb18455/com.shenghe.wzcq.qihoo_240.apk?en=curpage%3D%26exp%3D1591433424%26from%3DGuessyoulike_detail%26m2%3D%26ts%3D1590828624%26tok%3D1f4593490a547f1890b9bd8525c976f9%26v%3D%26f%3Dz.apk");
         list.add(app2);
-        AppContent app3 = new AppContent("¿ªĞÄÏûÏûÀÖ", "http://183.62.114.247/m.wdjcdn.com/apk.wdjcdn.com/2/65/61103e72de9d8f95465e68b535559652.apk");
+        AppContent app3 = new AppContent("å¼€å¿ƒæ¶ˆæ¶ˆä¹", "http://s.shouji.qihucdn.com/191024/cca8e1c3f7428cc66885867190869025/com.sy.ydcs.qihoo_103.apk?en=curpage%3D%26exp%3D1591433423%26from%3Dopenbox_detail_index%26m2%3D%26ts%3D1590828623%26tok%3D1496e3b73b5aa7ce24e8499f56569c2c%26v%3D%26f%3Dz.apk");
         list.add(app3);
-        AppContent app4 = new AppContent("»¶ÀÖ¶·µØÖ÷", "http://119.147.254.64/dd.myapp.com/16891/F5151080C8F69D2D992047D19B24C39D.apk");
+        AppContent app4 = new AppContent("æ¬¢ä¹æ–—åœ°ä¸»", "http://s.shouji.qihucdn.com/200526/59d063f40cf9f570b8cd5c35d1e88da5/com.smile.gifmaker_13991.apk?en=curpage%3D%26exp%3D1591504324%26from%3DAppList_qcms1%26m2%3D%26ts%3D1590899524%26tok%3D767fc346ea984488aad0ee06ed4556e2%26v%3D%26f%3Dz.apk");
         list.add(app4);
-        AppContent app5 = new AppContent("ÌìÌì¿áÅÜ", "http://183.61.182.28/m.wdjcdn.com/apk.wdjcdn.com/b/eb/295abecdc49760ed4b74fbc0d36c3ebb.apk");
+
+
+        AppContent app5 = new AppContent("å¤©å¤©é…·è·‘", "http://183.61.182.28/m.wdjcdn.com/apk.wdjcdn.com/b/eb/295abecdc49760ed4b74fbc0d36c3ebb.apk");
         list.add(app5);
-        AppContent app6 = new AppContent("ÖĞ¹úÏóÆå", "http://183.61.182.28/m.wdjcdn.com/apk.wdjcdn.com/8/0b/d7b904d26558ae7e22d1e6ebdf4830b8.apk");
+        AppContent app6 = new AppContent("ä¸­å›½è±¡æ£‹", "http://183.61.182.28/m.wdjcdn.com/apk.wdjcdn.com/8/0b/d7b904d26558ae7e22d1e6ebdf4830b8.apk");
         list.add(app6);
-        AppContent app7 = new AppContent("ÏûÃğĞÇĞÇ", "http://14.18.142.20/m.wdjcdn.com/apk.wdjcdn.com/b/a0/e8c01dc875f0c72f4952ce800f3f6a0b.apk");
+        AppContent app7 = new AppContent("æ¶ˆç­æ˜Ÿæ˜Ÿ", "http://14.18.142.20/m.wdjcdn.com/apk.wdjcdn.com/b/a0/e8c01dc875f0c72f4952ce800f3f6a0b.apk");
         list.add(app7);
-        AppContent app8 = new AppContent("Ä«¼£ÌìÆø", "http://125.88.65.248/m.wdjcdn.com/apk.wdjcdn.com/3/8d/19e04e8c921e30eaae2dd5835697e8d3.apk");
+        AppContent app8 = new AppContent("å¢¨è¿¹å¤©æ°”", "http://125.88.65.248/m.wdjcdn.com/apk.wdjcdn.com/3/8d/19e04e8c921e30eaae2dd5835697e8d3.apk");
         list.add(app8);
-        AppContent app9 = new AppContent("°µºÚÀèÃ÷", "http://183.61.182.28/m.wdjcdn.com/apk.wdjcdn.com/4/7d/410a086fe71834660e01cecdde55d7d4.apk");
+        AppContent app9 = new AppContent("æš—é»‘é»æ˜", "http://183.61.182.28/m.wdjcdn.com/apk.wdjcdn.com/4/7d/410a086fe71834660e01cecdde55d7d4.apk");
         list.add(app9);
-        AppContent app10 = new AppContent("ÓĞµÀ´Êµä", "http://14.18.142.20/m.wdjcdn.com/apk.wdjcdn.com/b/4a/ab2001cd8ec89687e34dab51119064ab.apk");
+        AppContent app10 = new AppContent("æœ‰é“è¯å…¸", "http://14.18.142.20/m.wdjcdn.com/apk.wdjcdn.com/b/4a/ab2001cd8ec89687e34dab51119064ab.apk");
         list.add(app10);
-        AppContent app11 = new AppContent("»¢ÆËÅÜ²½", "http://14.18.142.20/m.wdjcdn.com/apk.wdjcdn.com/1/7c/f0276757ab38391ba24489e224ca87c1.apk");
+        AppContent app11 = new AppContent("è™æ‰‘è·‘æ­¥", "http://14.18.142.20/m.wdjcdn.com/apk.wdjcdn.com/1/7c/f0276757ab38391ba24489e224ca87c1.apk");
         list.add(app11);
-        AppContent app12 = new AppContent("´óÖÚµãÆÀ", "http://125.88.65.248/m.wdjcdn.com/apk.wdjcdn.com/6/43/e5f01e24b83295ef6bd04c454377b436.apk");
+        AppContent app12 = new AppContent("å¤§ä¼—ç‚¹è¯„", "http://125.88.65.248/m.wdjcdn.com/apk.wdjcdn.com/6/43/e5f01e24b83295ef6bd04c454377b436.apk");
         list.add(app12);
-        AppContent app13 = new AppContent("Ò»ºÅµê", "http://125.88.65.248/m.wdjcdn.com/apk.wdjcdn.com/6/55/188dd88849b9901e3547d9cb104df556.apk");
+        AppContent app13 = new AppContent("ä¸€å·åº—", "http://125.88.65.248/m.wdjcdn.com/apk.wdjcdn.com/6/55/188dd88849b9901e3547d9cb104df556.apk");
         list.add(app13);
+
         return list;
     }
 }

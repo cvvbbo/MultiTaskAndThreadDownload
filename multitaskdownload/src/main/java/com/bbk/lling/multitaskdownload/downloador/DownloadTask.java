@@ -23,7 +23,7 @@ import java.net.MalformedURLException;
 
 /**
  * @Class: DownloadTask
- * @Description: ÎÄ¼şÏÂÔØAsyncTask
+ * @Description: æ–‡ä»¶ä¸‹è½½AsyncTask
  * @author: lling(www.cnblogs.com/liuling)
  * @Date: 2015/10/13
  */
@@ -61,7 +61,7 @@ public class DownloadTask extends AsyncTask<String, Integer , Long> {
 
     @Override
     protected void onProgressUpdate(Integer... values) {
-        //Í¨ÖªdownloadorÔö¼ÓÒÑÏÂÔØ´óĞ¡
+        //é€šçŸ¥downloadorå¢åŠ å·²ä¸‹è½½å¤§å°
 //        downloador.updateDownloadLength(values[0]);
     }
 
@@ -73,7 +73,7 @@ public class DownloadTask extends AsyncTask<String, Integer , Long> {
 
     @Override
     protected Long doInBackground(String... params) {
-        //ÕâÀï¼ÓÅĞ¶ÏµÄ×÷ÓÃÊÇ£ºÈç¹û»¹´¦ÓÚµÈ´ı¾ÍÔİÍ£ÁË£¬ÔËĞĞµ½ÕâÀïÒÑ¾­cancelÁË£¬¾ÍÖ±½ÓÍË³ö
+        //è¿™é‡ŒåŠ åˆ¤æ–­çš„ä½œç”¨æ˜¯ï¼šå¦‚æœè¿˜å¤„äºç­‰å¾…å°±æš‚åœäº†ï¼Œè¿è¡Œåˆ°è¿™é‡Œå·²ç»canceläº†ï¼Œå°±ç›´æ¥é€€å‡º
         if(isCancelled()) {
             return null;
         }
@@ -90,36 +90,36 @@ public class DownloadTask extends AsyncTask<String, Integer , Long> {
 
         DownloadInfo downloadInfo = null;
         try {
-            //±¾µØÎÄ¼ş
+            //æœ¬åœ°æ–‡ä»¶
             File file = new File(downloador.getDownloadPath() + File.separator + url.substring(url.lastIndexOf("/") + 1));
 
-            //»ñÈ¡Ö®Ç°ÏÂÔØ±£´æµÄĞÅÏ¢
+            //è·å–ä¹‹å‰ä¸‹è½½ä¿å­˜çš„ä¿¡æ¯
             downloadInfo = downloadInfoDAO.getDownloadInfoByTaskIdAndUrl(taskId, url);
-            //´ÓÖ®Ç°½áÊøµÄÎ»ÖÃ¼ÌĞøÏÂÔØ
-            //ÕâÀï¼ÓÁËÅĞ¶Ïfile.exists()£¬ÅĞ¶ÏÊÇ·ñ±»ÓÃ»§É¾³ıÁË£¬Èç¹ûÎÄ¼şÃ»ÓĞÏÂÔØÍê£¬µ«ÊÇÒÑ¾­±»ÓÃ»§É¾³ıÁË£¬ÔòÖØĞÂÏÂÔØ
+            //ä»ä¹‹å‰ç»“æŸçš„ä½ç½®ç»§ç»­ä¸‹è½½
+            //è¿™é‡ŒåŠ äº†åˆ¤æ–­file.exists()ï¼Œåˆ¤æ–­æ˜¯å¦è¢«ç”¨æˆ·åˆ é™¤äº†ï¼Œå¦‚æœæ–‡ä»¶æ²¡æœ‰ä¸‹è½½å®Œï¼Œä½†æ˜¯å·²ç»è¢«ç”¨æˆ·åˆ é™¤äº†ï¼Œåˆ™é‡æ–°ä¸‹è½½
             if(file.exists() && downloadInfo != null) {
                 if(downloadInfo.isDownloadSuccess() == 1) {
-                    //ÏÂÔØÍê³ÉÖ±½Ó½áÊø
+                    //ä¸‹è½½å®Œæˆç›´æ¥ç»“æŸ
                     return null;
                 }
                 beginPosition = beginPosition + downloadInfo.getDownloadLength();
                 downloadLength = downloadInfo.getDownloadLength();
             }
             if(!file.exists()) {
-                //Èç¹û´ËtaskÒÑ¾­ÏÂÔØÍê£¬µ«ÊÇÎÄ¼ş±»ÓÃ»§É¾³ı£¬ÔòĞèÒªÖØĞÂÉèÖÃÒÑÏÂÔØ³¤¶È£¬ÖØĞÂÏÂÔØ
+                //å¦‚æœæ­¤taskå·²ç»ä¸‹è½½å®Œï¼Œä½†æ˜¯æ–‡ä»¶è¢«ç”¨æˆ·åˆ é™¤ï¼Œåˆ™éœ€è¦é‡æ–°è®¾ç½®å·²ä¸‹è½½é•¿åº¦ï¼Œé‡æ–°ä¸‹è½½
                 downloador.resetDownloadLength();
             }
 
-            //ÉèÖÃÏÂÔØµÄÊı¾İÎ»ÖÃbeginPosition×Ö½Úµ½endPosition×Ö½Ú
+            //è®¾ç½®ä¸‹è½½çš„æ•°æ®ä½ç½®beginPositionå­—èŠ‚åˆ°endPositionå­—èŠ‚
             Header header_size = new BasicHeader("Range", "bytes=" + beginPosition + "-" + endPosition);
             request.addHeader(header_size);
-            //Ö´ĞĞÇëÇó»ñÈ¡ÏÂÔØÊäÈëÁ÷
+            //æ‰§è¡Œè¯·æ±‚è·å–ä¸‹è½½è¾“å…¥æµ
             response = client.execute(request);
             is = response.getEntity().getContent();
 
-            //´´½¨ÎÄ¼şÊä³öÁ÷
+            //åˆ›å»ºæ–‡ä»¶è¾“å‡ºæµ
             fos = new RandomAccessFile(file, "rw");
-            //´ÓÎÄ¼şµÄsizeÒÔºóµÄÎ»ÖÃ¿ªÊ¼Ğ´Èë
+            //ä»æ–‡ä»¶çš„sizeä»¥åçš„ä½ç½®å¼€å§‹å†™å…¥
             fos.seek(beginPosition);
 
             byte buffer [] = new byte[1024];
@@ -129,7 +129,7 @@ public class DownloadTask extends AsyncTask<String, Integer , Long> {
                 downloadLength += inputSize;
                 downloador.updateDownloadLength(inputSize);
 
-                //Èç¹ûÔİÍ£ÁË£¬ĞèÒª½«ÏÂÔØĞÅÏ¢´æÈëÊı¾İ¿â
+                //å¦‚æœæš‚åœäº†ï¼Œéœ€è¦å°†ä¸‹è½½ä¿¡æ¯å­˜å…¥æ•°æ®åº“
                 if (isCancelled()) {
                     if(downloadInfo == null) {
                         downloadInfo = new DownloadInfo();
@@ -138,7 +138,7 @@ public class DownloadTask extends AsyncTask<String, Integer , Long> {
                     downloadInfo.setDownloadLength(downloadLength);
                     downloadInfo.setTaskId(taskId);
                     downloadInfo.setDownloadSuccess(0);
-                    //±£´æÏÂÔØĞÅÏ¢µ½Êı¾İ¿â
+                    //ä¿å­˜ä¸‹è½½ä¿¡æ¯åˆ°æ•°æ®åº“
                     downloadInfoDAO.insertDownloadInfo(downloadInfo);
                     return null;
                 }
@@ -162,7 +162,7 @@ public class DownloadTask extends AsyncTask<String, Integer , Long> {
                 e.printStackTrace();
             }
         }
-        //Ö´ĞĞµ½ÕâÀï£¬ËµÃ÷¸ÃtaskÒÑ¾­ÏÂÔØÍêÁË
+        //æ‰§è¡Œåˆ°è¿™é‡Œï¼Œè¯´æ˜è¯¥taskå·²ç»ä¸‹è½½å®Œäº†
         if(downloadInfo == null) {
             downloadInfo = new DownloadInfo();
         }
@@ -170,7 +170,7 @@ public class DownloadTask extends AsyncTask<String, Integer , Long> {
         downloadInfo.setDownloadLength(downloadLength);
         downloadInfo.setTaskId(taskId);
         downloadInfo.setDownloadSuccess(1);
-        //±£´æÏÂÔØĞÅÏ¢µ½Êı¾İ¿â
+        //ä¿å­˜ä¸‹è½½ä¿¡æ¯åˆ°æ•°æ®åº“
         downloadInfoDAO.insertDownloadInfo(downloadInfo);
         return null;
     }

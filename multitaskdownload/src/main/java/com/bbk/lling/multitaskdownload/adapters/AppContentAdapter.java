@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @Class: AppContentAdapter
- * @Description: Ó¦ÓÃÊĞ³¡appÄÚÈİAdapter
+ * @Description: åº”ç”¨å¸‚åœºappå†…å®¹Adapter
  * @author: lling(www.cnblogs.com/liuling)
  * @Date: 2015/10/13
  */
@@ -68,7 +68,7 @@ public class AppContentAdapter extends BaseAdapter{
     }
 
     /**
-     * ÉèÖÃviewHolderµÄÊı¾İ
+     * è®¾ç½®viewHolderçš„æ•°æ®
      * @param holder
      * @param itemIndex
      */
@@ -82,13 +82,13 @@ public class AppContentAdapter extends BaseAdapter{
         } else {
             holder.downloadPercent.setVisibility(View.VISIBLE);
             holder.statusIcon.setProgress(appContent.getDownloadPercent());
-            holder.downloadPercent.setText("ÏÂÔØ½ø¶È£º" + appContent.getDownloadPercent() + "%");
+            holder.downloadPercent.setText("ä¸‹è½½è¿›åº¦ï¼š" + appContent.getDownloadPercent() + "%");
         }
     }
 
 
     /**
-     * ¾Ö²¿Ë¢ĞÂ
+     * å±€éƒ¨åˆ·æ–°
      * @param view
      * @param itemIndex
      */
@@ -96,7 +96,7 @@ public class AppContentAdapter extends BaseAdapter{
         if(view == null) {
             return;
         }
-        //´ÓviewÖĞÈ¡µÃholder
+        //ä»viewä¸­å–å¾—holder
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.statusIcon = (DownloadPercentView) view.findViewById(R.id.status_icon);
         holder.name = (TextView) view.findViewById(R.id.name);
@@ -106,7 +106,7 @@ public class AppContentAdapter extends BaseAdapter{
     }
 
     /**
-     * ¸ù¾İ×´Ì¬ÉèÖÃÍ¼±ê
+     * æ ¹æ®çŠ¶æ€è®¾ç½®å›¾æ ‡
      * @param downloadPercentView
      * @param status
      */
