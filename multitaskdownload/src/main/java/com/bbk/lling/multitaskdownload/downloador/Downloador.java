@@ -34,8 +34,8 @@ import java.util.concurrent.Executors;
  */
 public class Downloador {
     public static final String TAG = "Downloador";
-    private static final int THREAD_POOL_SIZE = 9;  //线程池大小为9
-    private static final int THREAD_NUM = 3;  //每个文件3个线程下载
+    private static final int THREAD_POOL_SIZE = 20;  //线程池大小为9
+    private static final int THREAD_NUM = 6;  //每个文件3个线程下载
     private static final int GET_LENGTH_SUCCESS = 1;
     public static final Executor THREAD_POOL_EXECUTOR = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
 
@@ -86,6 +86,7 @@ public class Downloador {
                 List<DownloadInfo> lists = DownloadInfoDAO.getInstance(context.getApplicationContext())
                         .getDownloadInfosByUrl(appContent.getUrl());
                 for (DownloadInfo info : lists) {
+                    //下载过程中记录已下载大小
                     downloadLength += info.getDownloadLength();
                 }
 
@@ -152,6 +153,7 @@ public class Downloador {
         if(percent == 100 || downloadLength == fileLength) {
             appContent.setDownloadPercent(100); //上面计算有时候会有点误差，算到percent=99
             appContent.setStatus(AppContent.Status.FINISHED);
+            //  往数据库里面添加记录
             DownloadFileDAO.getInstance(context.getApplicationContext()).updateDownloadFile(appContent);
         }
         Intent intent = new Intent(Constants.DOWNLOAD_MSG);
@@ -173,6 +175,7 @@ public class Downloador {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case GET_LENGTH_SUCCESS :
+                    // 下载核心逻辑
                     beginDownload();
                     break;
             }

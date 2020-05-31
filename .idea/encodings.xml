@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
-    <file url="file://$PROJECT_DIR$/multitaskdownload/src/main/java/com/bbk/lling/multitaskdownload/activitys/MainActivity.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/multitaskdownload/src/main/java/com/bbk/lling/multitaskdownload/adapters/AppContentAdapter.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/multitaskdownload/src/main/java/com/bbk/lling/multitaskdownload/beans/AppContent.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/multitaskdownload/src/main/java/com/bbk/lling/multitaskdownload/beans/DownloadInfo.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/multitaskdownload/src/main/java/com/bbk/lling/multitaskdownload/downloador/DownloadTask.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/multitaskdownload/src/main/java/com/bbk/lling/multitaskdownload/downloador/Downloador.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/multitaskdownload/src/main/java/com/bbk/lling/multitaskdownload/utils/DownloadUtils.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/multithreaddownload/src/main/java/com/bbk/lling/multithreaddownload/MainActivity2.java" charset="GBK" />
-    <file url="PROJECT" charset="UTF-8" />
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/multitaskdownload/src/main/java/com/bbk/lling/multitaskdownload/db/DBHelper.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/multitaskdownload/src/main/java/com/bbk/lling/multitaskdownload/db/DownloadFileDAO.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/multitaskdownload/src/main/java/com/bbk/lling/multitaskdownload/db/DownloadInfoDAO.java" charset="UTF-8" />
   </component>
 </project>

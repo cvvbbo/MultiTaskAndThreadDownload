@@ -37,12 +37,12 @@ public class MainActivity extends Activity {
     private static final String TAG = "MainActivity";
     private static final int DEFAULT_POOL_SIZE = 5;
     private static final int GET_LENGTH_SUCCESS = 1;
-    //ÏÂÔØÂ·¾¶
+    //ä¸‹è½½è·¯å¾„
     private String downloadPath = Environment.getExternalStorageDirectory() +
             File.separator + "download";
 
-//    private String mUrl = "http://ftp.neu.edu.cn/mirrors/eclipse/technology/epp/downloads/release/juno/SR2/eclipse-java-juno-SR2-linux-gtk-x86_64.tar.gz";
-    private String mUrl = "http://p.gdown.baidu.com/c4cb746699b92c9b6565cc65aa2e086552651f73c5d0e634a51f028e32af6abf3d68079eeb75401c76c9bb301e5fb71c144a704cb1a2f527a2e8ca3d6fe561dc5eaf6538e5b3ab0699308d13fe0b711a817c88b0f85a01a248df82824ace3cd7f2832c7c19173236";
+    //    private String mUrl = "http://ftp.neu.edu.cn/mirrors/eclipse/technology/epp/downloads/release/juno/SR2/eclipse-java-juno-SR2-linux-gtk-x86_64.tar.gz";
+    private String mUrl = "http://s.shouji.qihucdn.com/200415/c185e5d0f04224396f393a621d074df5/com.zzlywgl.h5.zzly2_128.apk?en=curpage%3D%26exp%3D1591433424%26from%3DGuessyoulike_detail%26m2%3D%26ts%3D1590828624%26tok%3D7f7f3e53203a9d3dfecaff5f6dc284c9%26v%3D%26f%3Dz.apk";
     private ProgressBar mProgressBar;
     private TextView mPercentTV;
     SharedPreferences mSharedPreferences = null;
@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
 
     private InnerHandler mHandler = new InnerHandler();
 
-    //´´½¨Ïß³Ì³Ø
+    //åˆ›å»ºçº¿ç¨‹æ± 
     private Executor mExecutor = Executors.newCachedThreadPool();
 
     private List<DownloadAsyncTask> mTaskList = new ArrayList<DownloadAsyncTask>();
@@ -62,19 +62,19 @@ public class MainActivity extends Activity {
         mProgressBar = (ProgressBar) findViewById(R.id.progressbar);
         mPercentTV = (TextView) findViewById(R.id.percent_tv);
         mSharedPreferences = getSharedPreferences("download", Context.MODE_PRIVATE);
-        //¿ªÊ¼ÏÂÔØ
+        //å¼€å§‹ä¸‹è½½
         findViewById(R.id.begin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new Thread() {
                     @Override
                     public void run() {
-                        //´´½¨´æ´¢ÎÄ¼ş¼Ğ
+                        //åˆ›å»ºå­˜å‚¨æ–‡ä»¶å¤¹
                         File dir = new File(downloadPath);
                         if (!dir.exists()) {
                             dir.mkdir();
                         }
-                        //»ñÈ¡ÎÄ¼ş´óĞ¡
+                        //è·å–æ–‡ä»¶å¤§å°
                         HttpClient client = new DefaultHttpClient();
                         HttpGet request = new HttpGet(mUrl);
                         HttpResponse response = null;
@@ -95,7 +95,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        //ÔİÍ£ÏÂÔØ
+        //æš‚åœä¸‹è½½
         findViewById(R.id.end).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,8 +110,8 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * ¿ªÊ¼ÏÂÔØ
-     * ¸ù¾İ´ıÏÂÔØÎÄ¼ş´óĞ¡¼ÆËãÃ¿¸öÏß³ÌÏÂÔØÎ»ÖÃ£¬²¢´´½¨AsyncTask
+     * å¼€å§‹ä¸‹è½½
+     * æ ¹æ®å¾…ä¸‹è½½æ–‡ä»¶å¤§å°è®¡ç®—æ¯ä¸ªçº¿ç¨‹ä¸‹è½½ä½ç½®ï¼Œå¹¶åˆ›å»ºAsyncTask
      */
     private void beginDownload() {
         mCurrentLength = 0L;
@@ -119,10 +119,10 @@ public class MainActivity extends Activity {
         mProgressBar.setProgress(0);
         long blockLength = mFileLength / DEFAULT_POOL_SIZE;
         for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
-            long beginPosition = i * blockLength;//Ã¿ÌõÏß³ÌÏÂÔØµÄ¿ªÊ¼Î»ÖÃ
-            long endPosition = (i + 1) * blockLength;//Ã¿ÌõÏß³ÌÏÂÔØµÄ½áÊøÎ»ÖÃ
+            long beginPosition = i * blockLength;//æ¯æ¡çº¿ç¨‹ä¸‹è½½çš„å¼€å§‹ä½ç½®
+            long endPosition = (i + 1) * blockLength;//æ¯æ¡çº¿ç¨‹ä¸‹è½½çš„ç»“æŸä½ç½®
             if (i == (DEFAULT_POOL_SIZE - 1)) {
-                endPosition = mFileLength;//Èç¹ûÕû¸öÎÄ¼şµÄ´óĞ¡²»ÎªÏß³Ì¸öÊıµÄÕûÊı±¶£¬Ôò×îºóÒ»¸öÏß³ÌµÄ½áÊøÎ»ÖÃ¼´ÎªÎÄ¼şµÄ×Ü³¤¶È
+                endPosition = mFileLength;//å¦‚æœæ•´ä¸ªæ–‡ä»¶çš„å¤§å°ä¸ä¸ºçº¿ç¨‹ä¸ªæ•°çš„æ•´æ•°å€ï¼Œåˆ™æœ€åä¸€ä¸ªçº¿ç¨‹çš„ç»“æŸä½ç½®å³ä¸ºæ–‡ä»¶çš„æ€»é•¿åº¦
             }
             DownloadAsyncTask task = new DownloadAsyncTask(beginPosition, endPosition);
             mTaskList.add(task);
@@ -131,16 +131,16 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * ¸üĞÂ½ø¶ÈÌõ
+     * æ›´æ–°è¿›åº¦æ¡
      */
     synchronized public void updateProgress() {
         int percent = (int) Math.ceil((float)mCurrentLength / (float)mFileLength * 100);
 //        Log.i(TAG, "downloading  " + mCurrentLength + "," + mFileLength + "," + percent);
         if(percent > mProgressBar.getProgress()) {
             mProgressBar.setProgress(percent);
-            mPercentTV.setText("ÏÂÔØ½ø¶È£º" + percent + "%");
+            mPercentTV.setText("ä¸‹è½½è¿›åº¦ï¼š" + percent + "%");
             if (mProgressBar.getProgress() == mProgressBar.getMax()) {
-                Toast.makeText(MainActivity.this, "ÏÂÔØ½áÊø", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "ä¸‹è½½ç»“æŸ", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -157,7 +157,7 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * ÏÂÔØµÄAsyncTask
+     * ä¸‹è½½çš„AsyncTask
      */
     private class DownloadAsyncTask extends AsyncTask<String, Integer , Long> {
         private static final String TAG = "DownloadAsyncTask";
@@ -190,11 +190,11 @@ public class MainActivity extends Activity {
             OutputStream output = null;
 
             try {
-                //±¾µØÎÄ¼ş
+                //æœ¬åœ°æ–‡ä»¶
                 File file = new File(downloadPath + File.separator + url.substring(url.lastIndexOf("/") + 1));
 
-                //»ñÈ¡Ö®Ç°ÏÂÔØ±£´æµÄĞÅÏ¢£¬´ÓÖ®Ç°½áÊøµÄÎ»ÖÃ¼ÌĞøÏÂÔØ
-                //ÕâÀï¼ÓÁËÅĞ¶Ïfile.exists()£¬ÅĞ¶ÏÊÇ·ñ±»ÓÃ»§É¾³ıÁË£¬Èç¹ûÎÄ¼şÃ»ÓĞÏÂÔØÍê£¬µ«ÊÇÒÑ¾­±»ÓÃ»§É¾³ıÁË£¬ÔòÖØĞÂÏÂÔØ
+                //è·å–ä¹‹å‰ä¸‹è½½ä¿å­˜çš„ä¿¡æ¯ï¼Œä»ä¹‹å‰ç»“æŸçš„ä½ç½®ç»§ç»­ä¸‹è½½
+                //è¿™é‡ŒåŠ äº†åˆ¤æ–­file.exists()ï¼Œåˆ¤æ–­æ˜¯å¦è¢«ç”¨æˆ·åˆ é™¤äº†ï¼Œå¦‚æœæ–‡ä»¶æ²¡æœ‰ä¸‹è½½å®Œï¼Œä½†æ˜¯å·²ç»è¢«ç”¨æˆ·åˆ é™¤äº†ï¼Œåˆ™é‡æ–°ä¸‹è½½
                 long downedPosition = mSharedPreferences.getLong(currentThreadIndex, 0);
                 if(file.exists() && downedPosition != 0) {
                     beginPosition = beginPosition + downedPosition;
@@ -204,16 +204,16 @@ public class MainActivity extends Activity {
                     }
                 }
 
-                //ÉèÖÃÏÂÔØµÄÊı¾İÎ»ÖÃbeginPosition×Ö½Úµ½endPosition×Ö½Ú
+                //è®¾ç½®ä¸‹è½½çš„æ•°æ®ä½ç½®beginPositionå­—èŠ‚åˆ°endPositionå­—èŠ‚
                 Header header_size = new BasicHeader("Range", "bytes=" + beginPosition + "-" + endPosition);
                 request.addHeader(header_size);
-                //Ö´ĞĞÇëÇó»ñÈ¡ÏÂÔØÊäÈëÁ÷
+                //æ‰§è¡Œè¯·æ±‚è·å–ä¸‹è½½è¾“å…¥æµ
                 response = client.execute(request);
                 is = response.getEntity().getContent();
 
-                //´´½¨ÎÄ¼şÊä³öÁ÷
+                //åˆ›å»ºæ–‡ä»¶è¾“å‡ºæµ
                 fos = new RandomAccessFile(file, "rw");
-                //´ÓÎÄ¼şµÄsizeÒÔºóµÄÎ»ÖÃ¿ªÊ¼Ğ´Èë£¬ÆäÊµÒ²²»ÓÃ£¬Ö±½ÓÍùºóĞ´¾Í¿ÉÒÔ¡£ÓĞÊ±ºò¶àÏß³ÌÏÂÔØĞèÒªÓÃ
+                //ä»æ–‡ä»¶çš„sizeä»¥åçš„ä½ç½®å¼€å§‹å†™å…¥ï¼Œå…¶å®ä¹Ÿä¸ç”¨ï¼Œç›´æ¥å¾€åå†™å°±å¯ä»¥ã€‚æœ‰æ—¶å€™å¤šçº¿ç¨‹ä¸‹è½½éœ€è¦ç”¨
                 fos.seek(beginPosition);
 
                 byte buffer [] = new byte[1024];
@@ -263,21 +263,21 @@ public class MainActivity extends Activity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-            //¸üĞÂ½çÃæ½ø¶ÈÌõ
+            //æ›´æ–°ç•Œé¢è¿›åº¦æ¡
             updateProgress();
         }
 
         @Override
         protected void onPostExecute(Long aLong) {
             Log.i(TAG, "download success ");
-            //ÏÂÔØÍê³ÉÒÆ³ı¼ÇÂ¼
+            //ä¸‹è½½å®Œæˆç§»é™¤è®°å½•
             mSharedPreferences.edit().remove(currentThreadIndex).commit();
         }
 
         @Override
         protected void onCancelled() {
             Log.i(TAG, "download cancelled ");
-            //¼ÇÂ¼ÒÑÏÂÔØ´óĞ¡current
+            //è®°å½•å·²ä¸‹è½½å¤§å°current
             mSharedPreferences.edit().putLong(currentThreadIndex, current).commit();
         }
 

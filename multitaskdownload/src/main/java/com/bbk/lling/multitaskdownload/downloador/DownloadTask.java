@@ -87,7 +87,6 @@ public class DownloadTask extends AsyncTask<String, Integer , Long> {
         InputStream is;
         RandomAccessFile fos = null;
         OutputStream output = null;
-
         DownloadInfo downloadInfo = null;
         try {
             //本地文件
@@ -122,11 +121,12 @@ public class DownloadTask extends AsyncTask<String, Integer , Long> {
             //从文件的size以后的位置开始写入
             fos.seek(beginPosition);
 
-            byte buffer [] = new byte[1024];
+            byte buffer [] = new byte[2048];
             int inputSize = -1;
             while((inputSize = is.read(buffer)) != -1) {
                 fos.write(buffer, 0, inputSize);
                 downloadLength += inputSize;
+                // 更新进度条。
                 downloador.updateDownloadLength(inputSize);
 
                 //如果暂停了，需要将下载信息存入数据库

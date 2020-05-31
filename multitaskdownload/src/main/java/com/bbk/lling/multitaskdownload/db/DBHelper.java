@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 /**
  * @Class: DBHelper
- * @Description: 数据库帮助类
+ * @Description: 鏁版嵁搴撳府鍔╃被
  * @author: lling(www.cnblogs.com/liuling)
  * @Date: 2015/10/14
  */

@@ -36,6 +36,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         mListView = (ListView) findViewById(R.id.listview);
         mAdapter = new AppContentAdapter(this);
+        // 需要下载的数据。里面都是url连接。
         mList = DownloadUtils.getTestData();
         initStatus();
         mAdapter.setDates(mList);

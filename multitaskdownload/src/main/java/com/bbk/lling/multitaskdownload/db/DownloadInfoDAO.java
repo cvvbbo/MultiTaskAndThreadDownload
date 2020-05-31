@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * @Class: DownloadInfoDAO
- * @Description: Ã¿¸öµ¥¶ÀÏß³ÌÏÂÔØĞÅÏ¢¼ÇÂ¼µÄÊı¾İ¿â²Ù×÷Àà
+ * @Description: æ¯ä¸ªå•ç‹¬çº¿ç¨‹ä¸‹è½½ä¿¡æ¯è®°å½•çš„æ•°æ®åº“æ“ä½œç±»
  * @author: lling(www.cnblogs.com/liuling)
  * @Date: 2015/10/13
  */
@@ -33,7 +33,7 @@ public class DownloadInfoDAO {
     }
 
     /**
-     * »ñÈ¡Êı¾İ¿âÁ¬½Ó
+     * è·å–æ•°æ®åº“è¿æ¥
      * @return
      */
     public SQLiteDatabase getConnection() {
@@ -47,14 +47,14 @@ public class DownloadInfoDAO {
     }
 
     /**
-     * ²åÈëÊı¾İ
+     * æ’å…¥æ•°æ®
      * @param downloadInfo
      */
     public void insertDownloadInfo(DownloadInfo downloadInfo) {
         if(downloadInfo == null) {
             return;
         }
-        //Èç¹û±¾µØÒÑ¾­´æÔÚ£¬Ö±½ÓĞŞ¸Ä
+        //å¦‚æœæœ¬åœ°å·²ç»å­˜åœ¨ï¼Œç›´æ¥ä¿®æ”¹
         if(getDownloadInfoByTaskIdAndUrl(downloadInfo.getTaskId(), downloadInfo.getUrl()) != null) {
             updateDownloadInfo(downloadInfo);
             return;
@@ -106,7 +106,7 @@ public class DownloadInfoDAO {
     }
 
     /**
-     * ¸ù¾İtaskidºÍurl»ñÈ¡ÏÂÔØĞÅÏ¢
+     * æ ¹æ®taskidå’Œurlè·å–ä¸‹è½½ä¿¡æ¯
      * @param taskId
      * @param url
      * @return
@@ -142,7 +142,7 @@ public class DownloadInfoDAO {
     }
 
     /**
-     * ¸üĞÂÏÂÔØĞÅÏ¢
+     * æ›´æ–°ä¸‹è½½ä¿¡æ¯
      * @param downloadInfo
      */
     public void updateDownloadInfo(DownloadInfo downloadInfo) {
