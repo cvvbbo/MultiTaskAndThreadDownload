@@ -23,6 +23,7 @@ import com.bbk.lling.multitaskdownload.downloador.Constants;
 import com.bbk.lling.multitaskdownload.downloador.Downloador;
 import com.bbk.lling.multitaskdownload.utils.DownloadUtils;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,7 +78,6 @@ public class MainActivity extends Activity {
             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
         }
 
-
     }
 
     /**
@@ -88,13 +88,42 @@ public class MainActivity extends Activity {
         List<AppContent> list = DownloadFileDAO.getInstance(this.getApplicationContext()).getAll();
         for (AppContent appContent : list) {
             for (AppContent app : mList) {
+
+
                 if (app.getUrl().equals(appContent.getUrl())) {
                     app.setStatus(appContent.getStatus());
                     app.setDownloadPercent(appContent.getDownloadPercent());
+
+
+                    // 如果用户删除了文件，需要用这个判断。
+                    if (appContent.getStatus() == AppContent.Status.FINISHED) {
+                        String appfile = app.getUrl().substring(app.getUrl().lastIndexOf("/") + 1);
+                        if (!has(appfile)) {
+                            app.setStatus(AppContent.Status.PENDING);
+                            app.setDownloadPercent(0);
+                            DownloadFileDAO.getInstance(this).updateDownloadFile(app);
+                        }
+                    }
                     break;
                 }
+
+
             }
         }
+    }
+
+
+    public Boolean has(String filename) {
+        File downpath = new File(DownloadUtils.getDownloadPath());
+        String[] arr = downpath.list();
+        String filepath =null;
+        for (String string : arr) {
+            if (string.equals(filename)) {
+                filepath = string;
+                break;
+            }
+        }
+        return filepath!=null?true:false;
     }
 
     @Override
