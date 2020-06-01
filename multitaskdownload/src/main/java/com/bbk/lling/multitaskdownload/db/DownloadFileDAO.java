@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * @Class: DownloadFileDAO
- * @Description: Ã¿¸öÎÄ¼şÏÂÔØ×´Ì¬¼ÇÂ¼µÄÊı¾İ¿â²Ù×÷Àà
+ * @Description: æ¯ä¸ªæ–‡ä»¶ä¸‹è½½çŠ¶æ€è®°å½•çš„æ•°æ®åº“æ“ä½œç±»
  * @author: lling(www.cnblogs.com/liuling)
  * @Date: 2015/10/13
  */
@@ -33,7 +33,7 @@ public class DownloadFileDAO {
     }
 
     /**
-     * »ñÈ¡Êı¾İ¿âÁ¬½Ó
+     * è·å–æ•°æ®åº“è¿æ¥
      * @return
      */
     public SQLiteDatabase getConnection() {
@@ -47,14 +47,14 @@ public class DownloadFileDAO {
     }
 
     /**
-     * ²åÈëÊı¾İ
+     * æ’å…¥æ•°æ®
      * @param appContent
      */
     public void insertDownloadFile(AppContent appContent) {
         if(appContent == null) {
             return;
         }
-        //Èç¹û±¾µØÒÑ¾­´æÔÚ£¬Ö±½ÓĞŞ¸Ä
+        //å¦‚æœæœ¬åœ°å·²ç»å­˜åœ¨ï¼Œç›´æ¥ä¿®æ”¹
         if(getAppContentByUrl(appContent.getUrl()) != null) {
             updateDownloadFile(appContent);
             return;
@@ -75,7 +75,7 @@ public class DownloadFileDAO {
     }
 
     /**
-     * ¸ù¾İurl»ñÈ¡ÏÂÔØÎÄ¼şĞÅÏ¢
+     * æ ¹æ®urlè·å–ä¸‹è½½æ–‡ä»¶ä¿¡æ¯
      * @param url
      * @return
      */
@@ -108,7 +108,7 @@ public class DownloadFileDAO {
     }
 
     /**
-     * ¸üĞÂÏÂÔØĞÅÏ¢
+     * æ›´æ–°ä¸‹è½½ä¿¡æ¯
      * @param appContent
      */
     public void updateDownloadFile(AppContent appContent) {
@@ -133,7 +133,7 @@ public class DownloadFileDAO {
     }
 
     /**
-     * »ñÈ¡ËùÓĞÏÂÔØÎÄ¼ş¼ÇÂ¼
+     * è·å–æ‰€æœ‰ä¸‹è½½æ–‡ä»¶è®°å½•
      * @return
      */
     public List<AppContent> getAll() {
@@ -163,7 +163,7 @@ public class DownloadFileDAO {
     }
 
     /**
-     * ¸ù¾İurlÉ¾³ı¼ÇÂ¼
+     * æ ¹æ®urlåˆ é™¤è®°å½•
      * @param url
      */
     public void delByUrl(String url) {

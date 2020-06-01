@@ -71,6 +71,7 @@ public class DownloadTask extends AsyncTask<String, Integer , Long> {
 //        downloador.updateDownloadInfo(null);
     }
 
+    // todo 这个类的网络请求要格外的小心，因为可能会导致异常。
     @Override
     protected Long doInBackground(String... params) {
         //这里加判断的作用是：如果还处于等待就暂停了，运行到这里已经cancel了，就直接退出

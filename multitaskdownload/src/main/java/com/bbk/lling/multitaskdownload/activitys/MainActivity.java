@@ -1,11 +1,16 @@
 package com.bbk.lling.multitaskdownload.activitys;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -30,6 +35,7 @@ public class MainActivity extends Activity {
     private List<AppContent> mList;
     private Map<String, Downloador> downloadorMap;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +51,7 @@ public class MainActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AppContent appContent = mList.get(position);
-                if(downloadorMap != null && downloadorMap.containsKey(appContent.getUrl())) {
+                if (downloadorMap != null && downloadorMap.containsKey(appContent.getUrl())) {
                     downloadorMap.get(appContent.getUrl()).pause();
                     downloadorMap.remove(appContent.getUrl());
                     appContent.setStatus(AppContent.Status.PAUSED);
@@ -55,25 +61,34 @@ public class MainActivity extends Activity {
                     downloador.download();
                     appContent.setStatus(AppContent.Status.WAITING);
                     mAdapter.notifyDataSetChanged();
-                    if(downloadorMap == null) {
+                    if (downloadorMap == null) {
                         downloadorMap = new HashMap<String, Downloador>();
                     }
                     downloadorMap.put(appContent.getUrl(), downloador);
                 }
             }
         });
+        // 通过广播来发送通知。
         IntentFilter intent = new IntentFilter(Constants.DOWNLOAD_MSG);
         registerReceiver(downloadStatusReceiver, intent);
+
+
+        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
+        }
+
+
     }
 
     /**
-     * 初始化下载状态
+     * 初始化下载状态  (重新赋值)
      */
     private void initStatus() {
+        // 把历史数据赋值
         List<AppContent> list = DownloadFileDAO.getInstance(this.getApplicationContext()).getAll();
         for (AppContent appContent : list) {
             for (AppContent app : mList) {
-                if(app.getUrl().equals(appContent.getUrl())) {
+                if (app.getUrl().equals(appContent.getUrl())) {
                     app.setStatus(appContent.getStatus());
                     app.setDownloadPercent(appContent.getDownloadPercent());
                     break;
@@ -91,13 +106,19 @@ public class MainActivity extends Activity {
     private BroadcastReceiver downloadStatusReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            // 这个intent 在Downloader方法中传值。
             AppContent appContent = intent.getParcelableExtra("appContent");
-            if(appContent == null) return;
+            if (appContent == null) return;
             int itemIndex = 0;
-            for(AppContent appContent1 : mList) {
-                if(appContent.getUrl().equals(appContent1.getUrl())) {
+            // 重新为 mList 赋值
+            for (AppContent appContent1 : mList) {
+                if (appContent.getUrl().equals(appContent1.getUrl())) {
                     itemIndex = mList.indexOf(appContent1);
                     appContent1.setDownloadPercent(appContent.getDownloadPercent());
+                    if (appContent.getDownloadPercent() == 99 || appContent.getDownloadPercent() == 100) {
+                        Log.e("thisb-->", appContent.getDownloadPercent() + "");
+                        Log.e("thisb-->", appContent.getDownloadPercent() + "");
+                    }
                     break;
                 }
             }

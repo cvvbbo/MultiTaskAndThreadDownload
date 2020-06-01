@@ -161,6 +161,7 @@ public class Downloador {
             appContent.setStatus(AppContent.Status.DOWNLOADING);
         }
         Bundle bundle = new Bundle();
+        // 这个的核心是改变数值的时候把整个 bean 传进来了。
         bundle.putParcelable("appContent", appContent);
         intent.putExtras(bundle);
         context.sendBroadcast(intent);
